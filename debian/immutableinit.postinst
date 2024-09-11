@@ -1,0 +1,12 @@
+#!/bin/sh
+set -e
+
+if [ "$1" = 'configure' ]; then
+  if [ ! -e /usr/sbin/init ]; then
+    ln -s /usr/sbin/immutableinit /usr/sbin/init
+  fi
+fi
+
+#DEBHELPER#
+
+exit 0

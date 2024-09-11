@@ -21,4 +21,4 @@ Architecture: any
 Depends: ${misc:Depends},
          ${shlibs:Depends}
 Built-Using: ${misc:Built-Using}
-Description: A `/sbin/init` shim that enables read-only root filesystems for Debian. (program)
+Description: A /sbin/init shim that enables read-only root filesystems for Debian. (program)
