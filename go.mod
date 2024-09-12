@@ -1,4 +1,4 @@
-module github.com/dpeckett/immutableinit
+module github.com/dpeckett/matchstick
 
 go 1.22.0
 

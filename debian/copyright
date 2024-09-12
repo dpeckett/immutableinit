@@ -1,6 +1,6 @@
 Format: https://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
-Source: https://github.com/dpeckett/immutableinit
-Upstream-Name: immutableinit
+Source: https://github.com/dpeckett/matchstick
+Upstream-Name: matchstick
 Upstream-Contact: Damian Peckett <damian@pecke.tt>
 
 Files: *

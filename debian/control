@@ -1,4 +1,4 @@
-Source: immutableinit
+Source: matchstick
 Section: golang
 Priority: optional
 Maintainer: Damian Peckett <damian@pecke.tt>
@@ -10,12 +10,12 @@ Build-Depends: debhelper-compat (= 13),
                golang-github-mitchellh-mapstructure-dev
 Testsuite: autopkgtest-pkg-go
 Standards-Version: 4.6.2
-Vcs-Browser: https://github.com/dpeckett/immutableinit
-Vcs-Git: https://github.com/dpeckett/immutableinit.git
-Homepage: https://github.com/dpeckett/immutableinit
-XS-Go-Import-Path: github.com/dpeckett/immutableinit
+Vcs-Browser: https://github.com/dpeckett/matchstick
+Vcs-Git: https://github.com/dpeckett/matchstick.git
+Homepage: https://github.com/dpeckett/matchstick
+XS-Go-Import-Path: github.com/dpeckett/matchstick
 
-Package: immutableinit
+Package: matchstick
 Section: admin
 Architecture: any
 Depends: ${misc:Depends},

@@ -11,7 +11,7 @@ export VERSION ?= $(shell git describe --tags --abbrev=0)
 
 override_dh_auto_install:
 	dh_auto_install -- --no-source
-	mv debian/immutableinit/usr/bin/ debian/immutableinit/usr/sbin
+	mv debian/matchstick/usr/bin/ debian/matchstick/usr/sbin
 
 override_dh_auto_test:
 ifneq ($(BUILD_ARCH), $(HOST_ARCH))

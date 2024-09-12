@@ -3,7 +3,7 @@ set -e
 
 if [ "$1" = 'configure' ]; then
   if [ ! -e /usr/sbin/init ]; then
-    ln -s /usr/sbin/immutableinit /usr/sbin/init
+    ln -s /usr/sbin/matchstick /usr/sbin/init
   fi
 fi
 

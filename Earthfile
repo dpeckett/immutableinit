@@ -4,9 +4,9 @@ ENV DO_NOT_TRACK=1
 WORKDIR /workspace
 
 all:
-  COPY (+build/immutableinit --GOARCH=amd64) ./dist/immutableinit-linux-amd64
-  COPY (+build/immutableinit --GOARCH=arm64) ./dist/immutableinit-linux-arm64
-  COPY (+build/immutableinit --GOARCH=riscv64) ./dist/immutableinit-linux-riscv64
+  COPY (+build/matchstick --GOARCH=amd64) ./dist/matchstick-linux-amd64
+  COPY (+build/matchstick --GOARCH=arm64) ./dist/matchstick-linux-arm64
+  COPY (+build/matchstick --GOARCH=riscv64) ./dist/matchstick-linux-riscv64
   COPY (+package/*.deb --GOARCH=amd64) ./dist/
   COPY (+package/*.deb --GOARCH=arm64) ./dist/
   COPY (+package/*.deb --GOARCH=riscv64) ./dist/
@@ -20,8 +20,8 @@ build:
   COPY go.mod go.sum ./
   RUN go mod download
   COPY . .
-  RUN CGO_ENABLED=0 go build --ldflags "-s" -o immutableinit main.go
-  SAVE ARTIFACT ./immutableinit AS LOCAL dist/immutableinit-${GOOS}-${GOARCH}
+  RUN CGO_ENABLED=0 go build --ldflags "-s" -o matchstick main.go
+  SAVE ARTIFACT ./matchstick AS LOCAL dist/matchstick-${GOOS}-${GOARCH}
 
 tidy:
   LOCALLY
@@ -57,8 +57,8 @@ package:
   # Build Dependencies
   RUN apt install -y \
     golang-github-mitchellh-mapstructure-dev
-  RUN mkdir -p /workspace/immutableinit
-  WORKDIR /workspace/immutableinit
+  RUN mkdir -p /workspace/matchstick
+  WORKDIR /workspace/matchstick
   COPY . .
   RUN if [ -n "$(git status --porcelain)" ]; then echo "Please commit your changes."; exit 1; fi
   RUN if [ -z "$(git describe --tags --exact-match 2>/dev/null)" ]; then echo "Current commit is not tagged."; exit 1; fi
@@ -68,7 +68,7 @@ package:
   ENV DEBFULLNAME="Damian Peckett"
   RUN /usr/local/bin/generate-changelog.sh
   RUN VERSION=$(git describe --tags --abbrev=0 | tr -d 'v') \
-    && tar -czf ../immutableinit_${VERSION}.orig.tar.gz --exclude-vcs .
+    && tar -czf ../matchstick_${VERSION}.orig.tar.gz --exclude-vcs .
   ARG GOARCH
   RUN dpkg-buildpackage -d -us -uc --host-arch=${GOARCH}
   SAVE ARTIFACT /workspace/*.deb AS LOCAL dist/

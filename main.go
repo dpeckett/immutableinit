@@ -19,19 +19,18 @@
 package main
 
 import (
-	"fmt"
 	"log/slog"
 	"os"
 	"path/filepath"
-	"reflect"
 	"strings"
 	"syscall"
 
-	"github.com/dpeckett/immutableinit/internal/cmdline"
+	"github.com/dpeckett/matchstick/internal/cmdline"
+	"github.com/dpeckett/matchstick/internal/util"
 	"github.com/mitchellh/mapstructure"
 )
 
-const commandLinePrefix = "immutableinit"
+const optionsPrefix = "matchstick"
 
 type Options struct {
 	Data       string   `cmdline:"data"`
@@ -80,10 +79,10 @@ func main() {
 		WeaklyTypedInput: true,
 		DecodeHook: mapstructure.ComposeDecodeHookFunc(
 			mapstructure.StringToSliceHookFunc(","),
-			stringToBooleanHookFunc(),
+			util.StringToBooleanHookFunc(),
 		),
 		MatchName: func(mapKey, fieldName string) bool {
-			return strings.EqualFold(strings.TrimPrefix(strings.ReplaceAll(mapKey, "-", "_"), commandLinePrefix+"."), fieldName)
+			return strings.EqualFold(strings.TrimPrefix(strings.ReplaceAll(mapKey, "-", "_"), optionsPrefix+"."), fieldName)
 		},
 	})
 	if err != nil {
@@ -161,28 +160,5 @@ func main() {
 	if err := syscall.Exec(opts.Cmd, argv, os.Environ()); err != nil {
 		slog.Error("Failed to exec init", slog.Any("cmd", opts.Cmd), slog.Any("error", err))
 		os.Exit(1)
-	}
-
-	slog.Error("Init exited unexpectedly")
-}
-
-func stringToBooleanHookFunc() mapstructure.DecodeHookFunc {
-	return func(f, t reflect.Type, data any) (interface{}, error) {
-		if f.Kind() != reflect.String {
-			return data, nil
-		}
-
-		if t != reflect.TypeOf(false) {
-			return data, nil
-		}
-
-		switch strings.ToLower(data.(string)) {
-		case "true", "yes", "1", "on":
-			return true, nil
-		case "false", "no", "0", "off":
-			return false, nil
-		}
-
-		return false, fmt.Errorf("invalid boolean value: %q", data)
 	}
 }
