@@ -26,6 +26,7 @@ import (
 	"syscall"
 
 	"github.com/immutos/matchstick/internal/cmdline"
+	"github.com/immutos/matchstick/internal/kmsg"
 	"github.com/immutos/matchstick/internal/util"
 	"github.com/mitchellh/mapstructure"
 )
@@ -54,6 +55,14 @@ var DefaultOptions = Options{
 }
 
 func main() {
+	// Log to the kernel log.
+	handler := kmsg.NewKmsgHandler(&slog.HandlerOptions{
+		Level: slog.LevelInfo,
+	})
+	defer handler.Close()
+
+	slog.SetDefault(slog.New(handler))
+
 	// Mount the /proc filesystem
 	slog.Info("Mounting /proc")
 
