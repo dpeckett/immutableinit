@@ -61,7 +61,7 @@ func main() {
 	})
 	defer handler.Close()
 
-	slog.SetDefault(slog.New(handler))
+	slog.SetDefault(slog.New(handler).WithGroup("matchstick"))
 
 	// Mount the /proc filesystem
 	slog.Info("Mounting /proc")

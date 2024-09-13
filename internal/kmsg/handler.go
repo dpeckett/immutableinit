@@ -32,6 +32,7 @@ var _ slog.Handler = (*KmsgHandler)(nil)
 type KmsgHandler struct {
 	f     *os.File
 	level slog.Leveler
+	group string
 	attr  map[string]slog.Attr
 }
 
@@ -63,6 +64,11 @@ func (kh *KmsgHandler) Enabled(_ context.Context, level slog.Level) bool {
 
 func (kh *KmsgHandler) Handle(_ context.Context, r slog.Record) error {
 	var sb strings.Builder
+	if kh.group != "" {
+		sb.WriteString(kh.group)
+		sb.WriteString(": ")
+	}
+
 	sb.WriteString(r.Message)
 
 	for _, attr := range kh.attr {
@@ -99,8 +105,8 @@ func (kh *KmsgHandler) WithGroup(name string) slog.Handler {
 	for key, attr := range kh.attr {
 		newHandler.attr[key] = attr
 	}
-	newHandler.attr["group"] = slog.String("group", name)
 
+	newHandler.group = name
 	return &newHandler
 }
 
