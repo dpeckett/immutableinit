@@ -21,7 +21,7 @@ sudo apt install matchstick
 
 Download statically linked binaries from the GitHub releases page: 
 
-[Latest Release](https://github.com/dpeckett/matchstick/releases/latest)
+[Latest Release](https://github.com/immutos/matchstick/releases/latest)
 
 ## Usage
 

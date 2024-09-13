@@ -1,4 +1,4 @@
-module github.com/dpeckett/matchstick
+module github.com/immutos/matchstick
 
 go 1.22.0
 

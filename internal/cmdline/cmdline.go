@@ -15,7 +15,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/dpeckett/matchstick/internal/shlex"
+	"github.com/immutos/matchstick/internal/shlex"
 )
 
 // CmdLine lets people view the raw & parsed /proc/cmdline in one place

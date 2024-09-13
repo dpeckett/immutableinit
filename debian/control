@@ -10,10 +10,10 @@ Build-Depends: debhelper-compat (= 13),
                golang-github-mitchellh-mapstructure-dev
 Testsuite: autopkgtest-pkg-go
 Standards-Version: 4.6.2
-Vcs-Browser: https://github.com/dpeckett/matchstick
-Vcs-Git: https://github.com/dpeckett/matchstick.git
-Homepage: https://github.com/dpeckett/matchstick
-XS-Go-Import-Path: github.com/dpeckett/matchstick
+Vcs-Browser: https://github.com/immutos/matchstick
+Vcs-Git: https://github.com/immutos/matchstick.git
+Homepage: https://github.com/immutos/matchstick
+XS-Go-Import-Path: github.com/immutos/matchstick
 
 Package: matchstick
 Section: admin

@@ -25,8 +25,8 @@ import (
 	"strings"
 	"syscall"
 
-	"github.com/dpeckett/matchstick/internal/cmdline"
-	"github.com/dpeckett/matchstick/internal/util"
+	"github.com/immutos/matchstick/internal/cmdline"
+	"github.com/immutos/matchstick/internal/util"
 	"github.com/mitchellh/mapstructure"
 )
 
