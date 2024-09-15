@@ -36,26 +36,12 @@ type KmsgHandler struct {
 	attr  map[string]slog.Attr
 }
 
-func NewKmsgHandler(opts *slog.HandlerOptions) *KmsgHandler {
+func NewKmsgHandler(f *os.File, opts *slog.HandlerOptions) *KmsgHandler {
 	return &KmsgHandler{
+		f:     f,
 		level: opts.Level,
 		attr:  make(map[string]slog.Attr),
 	}
-}
-
-func (kh *KmsgHandler) Close() error {
-	if kh.f != nil {
-		if err := kh.f.Sync(); err != nil {
-			return err
-		}
-
-		if err := kh.f.Close(); err != nil {
-			return err
-		}
-		kh.f = nil
-	}
-
-	return nil
 }
 
 func (kh *KmsgHandler) Enabled(_ context.Context, level slog.Level) bool {
@@ -111,14 +97,6 @@ func (kh *KmsgHandler) WithGroup(name string) slog.Handler {
 }
 
 func (kh *KmsgHandler) writeString(level slog.Level, msg string) error {
-	if kh.f == nil {
-		var err error
-		kh.f, err = os.OpenFile("/dev/kmsg", os.O_WRONLY, 0)
-		if err != nil {
-			return err
-		}
-	}
-
 	_, err := kh.f.WriteString(fmt.Sprintf("<%d>%s", toKLogLevel(level), msg))
 	if err != nil {
 		return err

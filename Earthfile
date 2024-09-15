@@ -56,7 +56,9 @@ package:
     && apt update
   # Build Dependencies
   RUN apt install -y \
-    golang-github-mitchellh-mapstructure-dev
+    golang-github-mitchellh-mapstructure-dev \
+    golang-github-spf13-pflag-dev \
+    golang-golang-x-sys-dev
   RUN mkdir -p /workspace/matchstick
   WORKDIR /workspace/matchstick
   COPY . .
