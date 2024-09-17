@@ -6,7 +6,7 @@ A `/sbin/init` shim that enables read-only root filesystems for Debian.
 
 ### From APT
 
-Add my [apt repository](https://github.com/dpeckett/apt.dpeckett.dev?tab=readme-ov-file#usage) to your system.
+Add the [immutos apt repository](https://github.com/immutos/apt?tab=readme-ov-file#usage) to your system.
 
 Then install matchstick:
 
@@ -14,7 +14,7 @@ Then install matchstick:
 
 ```shell
 sudo apt update
-sudo apt install matchstick
+sudo apt install -y matchstick
 ```
 
 ### GitHub Releases
