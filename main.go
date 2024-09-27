@@ -26,6 +26,7 @@ import (
 	"strings"
 
 	"github.com/immutos/matchstick/internal/cmdline"
+	"github.com/immutos/matchstick/internal/kmodule"
 	"github.com/immutos/matchstick/internal/kmsg"
 	"github.com/immutos/matchstick/internal/util"
 	"github.com/mitchellh/mapstructure"
@@ -97,6 +98,12 @@ func main() {
 				slog.Error("Failed to mount /proc", slog.Any("error", err))
 				os.Exit(1)
 			}
+		}
+
+		// Make sure the overlay filesystem module is loaded (if necessary).
+		if err := kmodule.ProbeOptions("overlay", "", kmodule.ProbeOpts{RootDir: "/"}); err != nil {
+			slog.Warn("Failed to load overlay fs module", slog.Any("error", err))
+			// Maybe it's compiled into the kernel?
 		}
 
 		// Parse the kernel command line.

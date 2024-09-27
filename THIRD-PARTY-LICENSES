@@ -7,6 +7,8 @@ Files:
  internal/cmdline/cmdline.go
  internal/cmdline/cmdline_linux.go
  internal/cmdline/cmdline_test.go
+ internal/kmodule/kmodule.go
+ internal/kmodule/kmodule_test.go
  internal/shlex/shlex.go
  internal/shlex/shlex_test.go
 Copyright:

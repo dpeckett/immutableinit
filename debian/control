@@ -7,6 +7,7 @@ Rules-Requires-Root: no
 Build-Depends: debhelper-compat (= 13),
                dh-sequence-golang,
                golang-any,
+               golang-github-dpeckett-uncompr-dev,
                golang-github-mitchellh-mapstructure-dev,
                golang-github-spf13-pflag-dev,
                golang-golang-x-sys-dev
