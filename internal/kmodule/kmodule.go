@@ -209,7 +209,7 @@ func genDeps(opts ProbeOpts) (depMap, error) {
 		fm, err := os.Open("/proc/modules")
 		if err == nil {
 			defer fm.Close()
-			genLoadedMods(fm, deps)
+			_ = genLoadedMods(fm, deps)
 		}
 	}
 
