@@ -143,7 +143,7 @@ func main() {
 	}
 
 	// Mount the /tmp filesystem (if necessary).
-	if f, err := os.Create("/tmp/.matchstick"); err != nil {
+	if f, err := os.Create("/tmp/.matchstick"); err == nil {
 		_ = f.Close()
 		_ = os.Remove(f.Name())
 	} else {
