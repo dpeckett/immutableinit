@@ -59,9 +59,7 @@ package:
     && apt update
   # Build Dependencies
   RUN apt install -y \
-    golang-github-dpeckett-uncompr-dev \
     golang-github-mitchellh-mapstructure-dev \
-    golang-github-pierrec-lz4-dev=4.1.18-1~bpo12+1 \
     golang-github-spf13-pflag-dev \
     golang-golang-x-sys-dev
   RUN mkdir -p /workspace/matchstick
